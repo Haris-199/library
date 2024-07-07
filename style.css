@@ -1,0 +1,23 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.book-card {
+    padding: 1rem;
+    border: 1px solid black;
+    margin-block: 1rem;
+}
+
+.book-card.read {
+    border-left: 3rem solid green;
+}
+.book-card.not-read {
+    border-left: 3rem solid red;
+}
