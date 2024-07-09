@@ -1,5 +1,8 @@
 const myLibrary = [];
 const books = document.getElementById("books");
+const newBookBtn = document.getElementById("new-book-btn");
+const dialog = document.getElementById("new-book-dialog");
+const addBookBtn = document.querySelector("#new-book-dialog form > button");
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -10,10 +13,6 @@ function Book(title, author, pages, read) {
         return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
     }
 }
-
-myLibrary.push(new Book("1984", "George Orwell", 449, "not read"));
-myLibrary.push(new Book("The Great Gatsby", "F. Scott Fitzgerald", 73, "read"));
-myLibrary.push(new Book("Pride and Prejudice", "Jane Austen", 340, "not read"));
 
 function addBookToLibrary() {
     const book = new Book();
@@ -50,5 +49,27 @@ function display() {
         books.appendChild(container);
     });
 }
+
+newBookBtn.addEventListener("click", () => dialog.showModal());
+
+dialog.addEventListener("click", event => {
+    const dialogDimensions = dialog.getBoundingClientRect();
+    if (
+        event.clientX < dialogDimensions.left ||
+        event.clientX > dialogDimensions.right ||
+        event.clientY < dialogDimensions.top ||
+        event.clientY > dialogDimensions.bottom
+    ) {
+        dialog.close();
+    }
+});
+
+addBookBtn.addEventListener("click", () => {
+    dialog.close();
+});
+
+myLibrary.push(new Book("1984", "George Orwell", 449, "not read"));
+myLibrary.push(new Book("The Great Gatsby", "F. Scott Fitzgerald", 73, "read"));
+myLibrary.push(new Book("Pride and Prejudice", "Jane Austen", 340, "not read"));
 
 display();
