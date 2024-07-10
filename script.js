@@ -25,6 +25,20 @@ function removeBook(book) {
     display();
 }
 
+function toggleRead(book, card) {
+    if (book.read === "read") {
+        card.classList.remove("read");
+        card.classList.add("not-read");
+        book.read = "not read";
+        read.innerText = "not read";
+    } else if (book.read === "not read") {
+        card.classList.remove("not-read");
+        card.classList.add("read");
+        book.read = "read";
+        read.innerText = "read";
+    }
+}
+
 function display() {
     while (books.firstChild)
         books.removeChild(books.firstChild);
@@ -36,6 +50,7 @@ function display() {
         const pages = document.createElement("p");
         const read = document.createElement("p");
         const removeBtn = document.createElement("button");
+        const statusBtn = document.createElement("button");
 
         title.innerText = book.title;
         author.innerText = `by ${book.author}`;
@@ -43,14 +58,18 @@ function display() {
         read.innerText = book.read;
         removeBtn.innerText = "Remove";
         removeBtn.setAttribute("type", "button");
+        statusBtn.innerText = "Change Read Status";
+        statusBtn.setAttribute("type", "button");
 
         removeBtn.addEventListener("click", () => removeBook(book));
+        statusBtn.addEventListener("click", (event) => toggleRead(book, container));
 
         container.appendChild(title);
         container.appendChild(author);
         container.appendChild(pages);
         container.appendChild(read);
         container.appendChild(removeBtn);
+        container.appendChild(statusBtn);
         container.classList.add("book-card");
         
         if (book.read === "read")
