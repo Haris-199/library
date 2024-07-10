@@ -112,8 +112,4 @@ addBookBtn.addEventListener("click", (event) => {
     dialog.close();
 });
 
-myLibrary.push(new Book("1984", "George Orwell", 449, "not read"));
-myLibrary.push(new Book("The Great Gatsby", "F. Scott Fitzgerald", 73, "read"));
-myLibrary.push(new Book("Pride and Prejudice", "Jane Austen", 340, "not read"));
-
 display();
