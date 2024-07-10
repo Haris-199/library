@@ -19,6 +19,12 @@ function addBookToLibrary(title, author, pages, read) {
     myLibrary.push(book);
 }
 
+function removeBook(book) {
+    let index = myLibrary.findIndex(b => b.title === book.title);
+    myLibrary.splice(index, 1);
+    display();
+}
+
 function display() {
     while (books.firstChild)
         books.removeChild(books.firstChild);
@@ -29,16 +35,22 @@ function display() {
         const author = document.createElement("h3");
         const pages = document.createElement("p");
         const read = document.createElement("p");
+        const removeBtn = document.createElement("button");
 
         title.innerText = book.title;
         author.innerText = `by ${book.author}`;
         pages.innerText = `${book.pages} Pages`;
         read.innerText = book.read;
+        removeBtn.innerText = "Remove";
+        removeBtn.setAttribute("type", "button");
+
+        removeBtn.addEventListener("click", () => removeBook(book));
 
         container.appendChild(title);
         container.appendChild(author);
         container.appendChild(pages);
         container.appendChild(read);
+        container.appendChild(removeBtn);
         container.classList.add("book-card");
         
         if (book.read === "read")
