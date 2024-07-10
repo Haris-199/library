@@ -14,8 +14,8 @@ function Book(title, author, pages, read) {
     }
 }
 
-function addBookToLibrary() {
-    const book = new Book();
+function addBookToLibrary(title, author, pages, read) {
+    const book = new Book(title, author, pages, read);
     myLibrary.push(book);
 }
 
@@ -64,7 +64,20 @@ dialog.addEventListener("click", event => {
     }
 });
 
-addBookBtn.addEventListener("click", () => {
+addBookBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    const form = document.forms["new-book-form"];
+    const fd = new FormData(form);
+
+    const title = fd.get("title");
+    const author = fd.get("author");
+    const pages = fd.get("pages");
+    const read = (fd.get("read") === "on")? "read" : "not read";
+
+    addBookToLibrary(title, author, pages, read);
+    display();
+
     dialog.close();
 });
 
